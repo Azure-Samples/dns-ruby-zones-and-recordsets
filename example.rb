@@ -84,6 +84,9 @@ def run_example
   puts "List dns record sets for resource group:"
   puts "\t #{dns_client.record_sets.list_all_in_resource_group(GROUP_NAME, ZONE_NAME)}"
 
+  puts 'Press any key to continue and delete the sample resources'
+  gets
+
   # #
   # # Delete a Zone
   # #
@@ -95,6 +98,7 @@ def run_example
   # #
   puts 'Deleting the resource group'
   resource_client.resource_groups.delete(GROUP_NAME)
+  puts "\nDeleted: #{GROUP_NAME}"
 
 end
 
