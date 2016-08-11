@@ -1,5 +1,5 @@
 ---
-services: app-service
+services: DNS
 platforms: ruby
 author: veronicagg
 ---
