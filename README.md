@@ -12,6 +12,8 @@ This sample demonstrates how to manage your Azure DNS using a ruby client.
 
 - [Run this sample](#run)
 - [What does example.rb do?](#sample)
+    - [Create a DNS record](#create)
+    - [Delete a zone](#delete)
 
 
 <a id="run"></a>
@@ -87,6 +89,34 @@ resource_group_params.class.class
 
 resource_client.resource_groups.create_or_update(GROUP_NAME, resource_group_params)
 ```
+
+<a id="create"></a>
+### Create a DNS record
+
+```ruby
+record = Azure::ARM::Dns::Models::RecordSet.new.tap do |r|
+    arecord1 = Azure::ARM::Dns::Models::ARecord.new.tap do |a|
+        a.ipv4address = "1.2.3.4"
+    end
+    arecord2 = Azure::ARM::Dns::Models::ARecord.new.tap do |a|
+        a.ipv4address = "1.2.3.5"
+    end
+    r.arecords = [arecord1 , arecord2]
+end
+record_params = Azure::ARM::Dns::Models::RecordSetUpdateParameters.new.tap do |r|
+    r.record_set = record
+end
+
+dns_client.record_sets.create_or_update(GROUP_NAME, ZONE_NAME, "www", Azure::ARM::Dns::Models::RecordType::A, record_params)
+```
+
+<a id="delete"></a>
+### Delete a zone
+
+```ruby
+dns_client.zones.delete(GROUP_NAME, ZONE_NAME)
+```
+
 
 ## More information
 Please refer to [Azure SDK for Ruby](https://github.com/Azure/azure-sdk-ruby) for more information.
