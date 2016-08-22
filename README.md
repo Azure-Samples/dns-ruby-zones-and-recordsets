@@ -34,7 +34,7 @@ This sample demonstrates how to manage your Azure DNS using a ruby client.
 1. Install the dependencies using bundle.
 
     ```
-    cd dns-sample
+    cd dns-ruby-zones-and-recordsets
     bundle install
     ```
 
